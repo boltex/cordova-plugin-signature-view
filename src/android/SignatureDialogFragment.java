@@ -34,7 +34,8 @@ public class SignatureDialogFragment extends DialogFragment {
     protected CharSequence clearLabel;
     protected CharSequence htmlString;
 
-    public SignatureDialogFragment(CharSequence title, CharSequence save, CharSequence clear, CharSequence html, CallbackContext ctx) {
+    public SignatureDialogFragment(CharSequence title, CharSequence save, CharSequence clear, CharSequence html,
+            CallbackContext ctx) {
         dialogTitle = title;
         callbackContext = ctx;
         htmlString = html;
@@ -42,9 +43,12 @@ public class SignatureDialogFragment extends DialogFragment {
         clearLabel = clear;
     }
 
-    // Closures are hard, so we jump through a few hoops and do it the Java way... The moronic way
-    // (if there's a way to get at the dialog view from the title view I'd love to hear it:
-    // so far it didn't work because getParent keeps returning the Layout even if invoked
+    // Closures are hard, so we jump through a few hoops and do it the Java way...
+    // The moronic way
+    // (if there's a way to get at the dialog view from the title view I'd love to
+    // hear it:
+    // so far it didn't work because getParent keeps returning the Layout even if
+    // invoked
     // on the parent etc)
     class DialogCloseListener implements View.OnClickListener {
 
@@ -66,6 +70,7 @@ public class SignatureDialogFragment extends DialogFragment {
             // on the JS side.
             callbackContext.success((String) null);
             alertDialog.cancel();
+            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
 
     }
@@ -86,7 +91,8 @@ public class SignatureDialogFragment extends DialogFragment {
         TextView titleCloseView = new TextView(activity);
         titleCloseView.setText("╳");
         titleCloseView.setTextSize(TypedValue.COMPLEX_UNIT_MM, 5);
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT);
         params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         titleCloseView.setLayoutParams(params);
         titleCloseView.setPadding(0, 0, 15, 0);
@@ -95,25 +101,28 @@ public class SignatureDialogFragment extends DialogFragment {
 
         RelativeLayout titleView = new RelativeLayout(activity);
         titleView.setGravity(Gravity.FILL_HORIZONTAL | Gravity.CENTER_VERTICAL);
-        titleView.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.FILL_PARENT));
+        titleView.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
+                RelativeLayout.LayoutParams.FILL_PARENT));
         titleView.addView(titleLabelView);
         titleView.addView(titleCloseView);
 
         RelativeLayout mainView = new RelativeLayout(activity);
         mainView.setGravity(Gravity.FILL_HORIZONTAL | Gravity.CENTER_VERTICAL);
-        mainView.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.FILL_PARENT));
+        mainView.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
+                RelativeLayout.LayoutParams.FILL_PARENT));
         mainView.addView(signaturePad);
 
         if (htmlString != null) {
             // XXX TODO: Find a way to use the same class as the
-            // current Cordova Webview.  If we're using Crosswalk it
+            // current Cordova Webview. If we're using Crosswalk it
             // should automatically pick up that class.
             WebView htmlView = new WebView(activity);
             WebSettings setting = htmlView.getSettings();
 
             setting.setJavaScriptEnabled(true);
             setting.setDefaultTextEncodingName("utf-8");
-            htmlView.setLayerType(WebView.LAYER_TYPE_SOFTWARE, null); // FAST RENDERING, PLEASE (but will be slower when using fancy effects)
+            htmlView.setLayerType(WebView.LAYER_TYPE_SOFTWARE, null); // FAST RENDERING, PLEASE (but will be slower when
+                                                                      // using fancy effects)
 
             // Nobody knows exactly how this works...
             htmlView.loadDataWithBaseURL("file:///android_asset/www/", htmlString.toString(), "text/html", null, null);
@@ -182,19 +191,17 @@ public class SignatureDialogFragment extends DialogFragment {
 
         return dialog;
     }
-/***
-    @Override
-    public void onCancel(DialogInterface dialog) {
-        super.onCancel(dialog);
-
-        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-    }
-
-    @Override
-    public void onDismiss(DialogInterface dialog) {
-        super.onDismiss(dialog);
-
-        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-    }
-*/
+    /***
+     * @Override public void onCancel(DialogInterface dialog) {
+     *           super.onCancel(dialog);
+     * 
+     *           getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+     *           }
+     * 
+     * @Override public void onDismiss(DialogInterface dialog) {
+     *           super.onDismiss(dialog);
+     * 
+     *           getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+     *           }
+     */
 }
