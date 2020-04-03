@@ -70,7 +70,6 @@ public class SignatureDialogFragment extends DialogFragment {
             // on the JS side.
             callbackContext.success((String) null);
             alertDialog.cancel();
-            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
 
     }
@@ -171,6 +170,8 @@ public class SignatureDialogFragment extends DialogFragment {
                         }
 
                         ((AlertDialog) dialog).dismiss();
+                        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
                     }
 
                 });
@@ -191,17 +192,19 @@ public class SignatureDialogFragment extends DialogFragment {
 
         return dialog;
     }
-    /***
-     * @Override public void onCancel(DialogInterface dialog) {
-     *           super.onCancel(dialog);
-     * 
-     *           getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-     *           }
-     * 
-     * @Override public void onDismiss(DialogInterface dialog) {
-     *           super.onDismiss(dialog);
-     * 
-     *           getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-     *           }
-     */
+
+    @Override
+    public void onCancel(DialogInterface dialog) {
+        super.onCancel(dialog);
+
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        super.onDismiss(dialog);
+
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+    }
+
 }
