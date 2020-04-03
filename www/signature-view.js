@@ -12,7 +12,7 @@
                     typeof window.cordova.require === 'function' &&
                     typeof window.device === 'object' &&
                     ['Android'].indexOf(window.device.platform) !== -1) {
-                var SignatureViewNative = window.cordova.require('nl.codeyellow.signature.Signature');
+                var SignatureViewNative = window.cordova.require('cz.akropol.signature.Signature');
                 SignatureViewNative.getSignature.apply(SignatureViewNative.getSignature, arguments);
             } else {
                 signature.getSignatureFallback.apply(signature, arguments);

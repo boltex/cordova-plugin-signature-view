@@ -1,6 +1,8 @@
 Cordova Signature View plugin
 =============================
 
+Modified from https://bitbucket.org/akropo1/cz.akropol.signature
+
 This plugin provides a simple "pad" for requesting a user's signature
 which you can use in Cordova/Phonegap applications.  For efficiency
 reasons, the pad is implemented natively where available (currently
@@ -59,12 +61,12 @@ Here's a minimal working example.  It assumes there's a CANVAS element
 in your HTML document which has an id of `signature`.
 
 	:::javascript
-	var Signature = cordova.require('nl.codeyellow.signature.Signature');
+	var Signature = cordova.require('cz.akropol.signature.Signature');
 	Signature.getSignature(
 		function (imgData) {
 			/* This is the "success" callback. */
 			if (!imgData) return; // User clicked cancel, we got no image data.
-	
+
 			var canvas = document.getElementById('signature'),
 			ctx = canvas.getContext('2d');
 			canvas.width = imgData.width;

@@ -3,7 +3,7 @@
  * and an OK/Cancel button to commit or discard their signature. Embeds
  * SignatureView as the signature area.
  */
-package nl.codeyellow.app;
+package cz.akropol.plugin;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -182,7 +182,7 @@ public class SignatureDialogFragment extends DialogFragment {
 
         return dialog;
     }
-
+/***
     @Override
     public void onCancel(DialogInterface dialog) {
         super.onCancel(dialog);
@@ -196,5 +196,5 @@ public class SignatureDialogFragment extends DialogFragment {
 
         getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
-
+*/
 }
