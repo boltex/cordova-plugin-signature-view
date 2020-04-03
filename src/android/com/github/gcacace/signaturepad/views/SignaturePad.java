@@ -29,7 +29,7 @@ import java.util.List;
 
 public class SignaturePad extends View {
 
-    //View state
+    // View state
     private List<TimedPoint> mPoints;
     private boolean mIsEmpty;
     private float mLastTouchX;
@@ -38,7 +38,7 @@ public class SignaturePad extends View {
     private float mLastWidth;
     private final RectF mDirtyRect;
 
-    //Configurable parameters
+    // Configurable parameters
     private final float mMinWidth;
     private final float mMaxWidth;
     private final float mVelocityFilterWeight;
@@ -59,20 +59,20 @@ public class SignaturePad extends View {
     public SignaturePad(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        //Configurable parameters
+        // Configurable parameters
         mMinWidth = 3f;
         mMaxWidth = 7f;
         mVelocityFilterWeight = 0.9f;
         mPaint.setColor(Color.BLACK);
 
-        //Fixed parameters
+        // Fixed parameters
         setBackgroundColor(Color.WHITE);
         mPaint.setAntiAlias(true);
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setStrokeCap(Paint.Cap.ROUND);
         mPaint.setStrokeJoin(Paint.Join.ROUND);
 
-        //Dirty rectangle to update only the changed portion of the view
+        // Dirty rectangle to update only the changed portion of the view
         mDirtyRect = new RectF();
 
         clear();
@@ -99,8 +99,7 @@ public class SignaturePad extends View {
             float velocity = endPoint.velocityFrom(startPoint);
             velocity = Float.isNaN(velocity) ? 0.0f : velocity;
 
-            velocity = mVelocityFilterWeight * velocity
-                    + (1 - mVelocityFilterWeight) * mLastVelocity;
+            velocity = mVelocityFilterWeight * velocity + (1 - mVelocityFilterWeight) * mLastVelocity;
 
             // The new width is a function of the velocity. Higher velocities
             // correspond to thinner strokes.
@@ -230,12 +229,9 @@ public class SignaturePad extends View {
                 return false;
         }
 
-        //invalidate();
-        invalidate(
-                (int) (mDirtyRect.left - mMaxWidth),
-                (int) (mDirtyRect.top - mMaxWidth),
-                (int) (mDirtyRect.right + mMaxWidth),
-                (int) (mDirtyRect.bottom + mMaxWidth));
+        // invalidate();
+        invalidate((int) (mDirtyRect.left - mMaxWidth), (int) (mDirtyRect.top - mMaxWidth),
+                (int) (mDirtyRect.right + mMaxWidth), (int) (mDirtyRect.bottom + mMaxWidth));
 
         return true;
     }
@@ -294,11 +290,14 @@ public class SignaturePad extends View {
 
     public Bitmap getSignatureBitmap() {
         Bitmap originalBitmap = getTransparentSignatureBitmap();
-        Bitmap whiteBgBitmap = Bitmap.createBitmap(originalBitmap.getWidth(), originalBitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        Bitmap whiteBgBitmap = Bitmap.createBitmap(originalBitmap.getWidth(), originalBitmap.getHeight(),
+                Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(whiteBgBitmap);
         canvas.drawColor(Color.WHITE);
         canvas.drawBitmap(originalBitmap, 0, 0, null);
-        return whiteBgBitmap;
+        // return whiteBgBitmap;
+        return originalBitmap;
+
     }
 
     public Bitmap getTransparentSignatureBitmap() {
@@ -333,8 +332,7 @@ public class SignaturePad extends View {
 
     private void ensureSignatureBitmap() {
         if (mSignatureBitmap == null) {
-            mSignatureBitmap = Bitmap.createBitmap(getWidth(), getHeight(),
-                    Bitmap.Config.ARGB_8888);
+            mSignatureBitmap = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.ARGB_8888);
             mSignatureBitmapCanvas = new Canvas(mSignatureBitmap);
         }
     }
