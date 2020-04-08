@@ -1,6 +1,9 @@
 Cordova Signature View plugin
 =============================
 
+Transparent Background Mod
+--------------------------
+
 Modified from https://bitbucket.org/akropo1/cz.akropol.signature
 
 This plugin provides a simple "pad" for requesting a user's signature
