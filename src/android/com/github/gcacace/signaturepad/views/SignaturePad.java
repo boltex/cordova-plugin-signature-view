@@ -293,7 +293,7 @@ public class SignaturePad extends View {
         Bitmap whiteBgBitmap = Bitmap.createBitmap(originalBitmap.getWidth(), originalBitmap.getHeight(),
                 Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(whiteBgBitmap);
-        // canvas.drawColor(Color.WHITE); // * OMIT white background
+        canvas.drawColor(Color.WHITE); // * OMIT white background
         canvas.drawBitmap(originalBitmap, 0, 0, null);
         return whiteBgBitmap;
 
